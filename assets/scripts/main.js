@@ -19,6 +19,22 @@
     'common': {
       init: function() {
         // JavaScript to be fired on all pages
+        $('#flyout').on('show.bs.collapse', function(){
+          $('body').addClass('flyoutActive');
+        }).on('hidden.bs.collapse', function(){
+          $('body').removeClass('flyoutActive');
+        });
+
+        $('.menu-item-has-children > .toggle').click(function(){
+          var el = $(this);
+          $('~.sub-menu', this).toggle('fast', function(){
+            if(el.hasClass('fa-chevron-down')){
+              el.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+            } else {
+              el.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+            }
+          });
+        });
       },
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired
